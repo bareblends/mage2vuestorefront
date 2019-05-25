@@ -6,7 +6,7 @@ module.exports = {
     useUrlDispatcher: JSON.parse(process.env.SEO_USE_URL_DISPATCHER || true),
     productUrlPathMapper: (product) => {
       let destPath = ''
-      if (product.category && product.category.length > 0) {
+      if (product.category && product.category.length > 0 && product.category[0].name) {
         const firstCat = product.category[0]
         destPath = (firstCat.path ? (firstCat.path) : _slugify(firstCat.name)) + '/' + (product.slug ? product.slug : _slugify(product.name + '-' + product.id))
       } else {
