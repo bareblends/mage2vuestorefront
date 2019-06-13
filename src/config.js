@@ -5,18 +5,12 @@ module.exports = {
   seo: {
     useUrlDispatcher: JSON.parse(process.env.SEO_USE_URL_DISPATCHER || true),
     productUrlPathMapper: (product) => {
-      let destPath = ''
-      if (product.category && product.category.length > 0 && product.category[0].name) {
-        const firstCat = product.category[0]
-        destPath = (firstCat.path ? (firstCat.path) : _slugify(firstCat.name)) + '/' + (product.slug ? product.slug : _slugify(product.name))
-      } else {
-        destPath = (product.slug ? product.slug : _slugify(product.name))
-      }
+      let destPath = product.url_path
       console.log('Dest. product path = ', destPath)
       return destPath
     },
     categoryUrlPathMapper: (category) => {
-      const destSlug = (category.url_path ? category.url_path + '/': '') + category.url_key
+      const destSlug = category.url_path
       console.log('Dest. cat path = ', destSlug)
       return destSlug
     },
