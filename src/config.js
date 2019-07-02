@@ -5,7 +5,11 @@ module.exports = {
   seo: {
     useUrlDispatcher: JSON.parse(process.env.SEO_USE_URL_DISPATCHER || true),
     productUrlPathMapper: (product) => {
-      let destPath = product.url_path
+      if (product.url_path != null ){
+        var destPath = product.url_path
+      } else {
+        var destPath = product.url_key
+      }
       console.log('Dest. product path = ', destPath)
       return destPath
     },
@@ -15,6 +19,7 @@ module.exports = {
       return destSlug
     },
   },
+
 
   magento: {
     url: process.env.MAGENTO_URL || 'http://magento2.demo-1.divante.pl/rest/',
